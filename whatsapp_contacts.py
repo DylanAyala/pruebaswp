@@ -23,4 +23,4 @@ for person in driver.find_elements_by_class_name('_2wP_Y'):
     print(title)
 
 
-
+driver.close()

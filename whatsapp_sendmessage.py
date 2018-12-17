@@ -15,34 +15,30 @@ wait = WebDriverWait(driver, 600)
 
 # Replace 'Friend's Name' with the name of your friend 
 # or the name of a group
-#target = '"Akshay Wd"'
+target = '"+54 9 11 5004-7121"'
 
 # Replace the below string with your own message
-string = sys.argv[1]
 
-#x_arg = '//span[contains(@title,' + target + ')]'
-#group_title = wait.until(EC.presence_of_element_located((
-#	By.XPATH, x_arg)))
-#group_title.click()
+
 time.sleep(5)
 
-sendbutton1 = driver.find_elements_by_css_selector('hover _2EXPL').click()
+x_arg = '//span[contains(@title,' + target + ')]'
+group_title = wait.until(EC.presence_of_element_located((
+    By.XPATH, x_arg)))
+group_title.click()
+time.sleep(3)
 
+for i in range(5):
+    # sendbutton1 = driver.find_elements_by_css_selector('_2EXPL').click()
+    message = driver.find_elements_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]')[0]
 
-time.sleep(10)
+    time.sleep(5)
 
-message = driver.find_elements_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]')[0]
+    string=input("Introducir texto:")
 
+    message.send_keys(string)
 
-message.send_keys(string)
+    time.sleep(5)
 
-time.sleep(2)
-
-sendbutton = driver.find_elements_by_xpath('//*[@id="main"]/footer/div[1]/div[3]/button')[0]
-sendbutton.click()
-
-
-
-
-
-
+    sendbutton = driver.find_elements_by_xpath('//*[@id="main"]/footer/div[1]/div[3]/button')[0]
+    sendbutton.click()
