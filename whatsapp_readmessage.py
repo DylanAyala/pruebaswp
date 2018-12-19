@@ -26,8 +26,6 @@ group_title = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div
 time.sleep(1)
 
 for person in driver.find_elements_by_class_name('Tkt2p'):
+    message = person.find_element_by_xpath('div[1]').text
 
-    message= person.find_element_by_xpath('div[1]').text
-
-    print (message)
-
+    print(message)

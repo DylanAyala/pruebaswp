@@ -34,7 +34,7 @@ for i in range(5):
 
     time.sleep(5)
 
-    string=input("Introducir texto:")
+    string = input("Introducir texto:")
 
     message.send_keys(string)
 
@@ -42,3 +42,4 @@ for i in range(5):
 
     sendbutton = driver.find_elements_by_xpath('//*[@id="main"]/footer/div[1]/div[3]/button')[0]
     sendbutton.click()
+
