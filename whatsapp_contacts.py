@@ -80,6 +80,5 @@ while contactoU != contactoU2:
     leeer()
     contactoU2 = contactos[-1]
 
-
 for contactos1 in contactos:
     print(contactos1)
