@@ -5,17 +5,18 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 import sys
+import mongo
 
 driver = webdriver.Chrome('./chromedriver')
 
 driver.get("https://web.whatsapp.com/")
 wait = WebDriverWait(driver, 600)
 
-target = '"+54 9 11 5004-7121"'
+target = '+54 9 11 5004-7121'
 
 time.sleep(5)
 
-x_arg = '//span[contains(@title,' + target + ')]'
+x_arg = '//span[contains(@title,"' + target + '")]'
 group_title = wait.until(EC.presence_of_element_located((
     By.XPATH, x_arg)))
 group_title.click()
@@ -25,13 +26,7 @@ group_title = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div
 
 time.sleep(1)
 
-mensajes = list([])
-
 for person in driver.find_elements_by_class_name('message-in'):
     message = person.find_element_by_xpath('div/div[1]').text
     hora = person.find_element_by_xpath('div/div[2]/div').text
-    mensajes.append(message + ',' + hora)
-
-
-for mensajess in mensajes:
-    print(mensajess)
+    mongo.insert(target, message, hora)

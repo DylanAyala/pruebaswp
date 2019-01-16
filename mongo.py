@@ -1,14 +1,15 @@
-from mongoengine import *
+from pymongo import MongoClient
+from datetime import datetime
 
-connect(
-    db='testdb',
-    username='admin',
-    password='1234',
-    # host='mongodb://admin:qwerty@localhost/production'
-)
+conection = MongoClient('localhost', 27017)
+
+dataBase = conection['testdb']
+
+collection = dataBase['Mensajes']
+
+horaLeido = datetime.now()
 
 
-class User(Document):
-    email = StringField(required=True)
-    first_name = StringField(max_length=50)
-    last_name = StringField(max_length=50)
+def insert(contacto, mensaje, hora):
+    mydict = {"Contacto": contacto, "Mensaje": mensaje, "Hora": hora, "horaLeido": horaLeido}
+    collection.insert_one(mydict)
