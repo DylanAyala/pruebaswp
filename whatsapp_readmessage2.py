@@ -27,9 +27,10 @@ time.sleep(1)
 
 mensajes = list([])
 
-for person in driver.find_elements_by_class_name('Tkt2p'):
-    message = person.find_element_by_xpath('div[1]').text
-    mensajes.append(message)
+for person in driver.find_elements_by_class_name('message-in'):
+    message = person.find_element_by_xpath('div/div[1]').text
+    hora = person.find_element_by_xpath('div/div[2]/div').text
+    mensajes.append(message + ',' + hora)
 
 
 for mensajess in mensajes:
