@@ -11,6 +11,11 @@ driver = webdriver.Chrome('./chromedriver')
 driver.get("https://web.whatsapp.com/")
 wait = WebDriverWait(driver, 600)
 
+driver = webdriver.Chrome('./chromedriver')
+
+driver.get("https://web.whatsapp.com/")
+wait = WebDriverWait(driver, 600)
+
 target = '"+54 9 11 5004-7121"'
 
 time.sleep(5)
@@ -30,10 +35,6 @@ mensajes = list([])
 for person in driver.find_elements_by_class_name('Tkt2p'):
     message = person.find_element_by_xpath('div[1]').text
     mensajes.append(message)
-
-for person in driver.find_elements_by_class_name('Tkt2p'):
-    person.click()
-    break
 
 
 for mensajess in mensajes:
