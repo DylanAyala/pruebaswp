@@ -13,3 +13,4 @@ horaLeido = datetime.now()
 def insert(contacto, mensaje, hora):
     mydict = {"Contacto": contacto, "Mensaje": mensaje, "Hora": hora, "horaLeido": horaLeido}
     collection.insert_one(mydict)
+
