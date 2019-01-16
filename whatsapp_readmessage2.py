@@ -5,8 +5,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 import sys
-import mongo
-import mongo2
+import insert
+import buscoMensaje
 
 driver = webdriver.Chrome('./chromedriver')
 
@@ -30,6 +30,6 @@ time.sleep(1)
 for person in driver.find_elements_by_class_name('message-in'):
     message = person.find_element_by_xpath('div/div[1]').text
     hora = person.find_element_by_xpath('div/div[2]/div').text
-    resultado = mongo2.realizoQuery(target, message, hora)
+    resultado = buscoMensaje.realizoQuery(target, message, hora)
     if resultado < 1:
-        mongo.insert(target, message, hora)
+        insert.insert(target, message, hora)
