@@ -12,6 +12,4 @@ def realizoQuery(contacto, mensaje, hora):
     query = json.loads(
         '{"Contacto": ' + '"' + contacto + '"' + ',"Mensaje": ' + '"' + mensaje + '"' + ', "Hora": ' + '"' + hora + '"' + '}')
     result = collection.count(query)
-
-    print(query)
     return result

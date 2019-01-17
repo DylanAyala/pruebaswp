@@ -1,45 +1,19 @@
-from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-import time
-import sys
-
-# Replace below path with the absolute path
-# to chromedriver in your computer
-driver = webdriver.Chrome('./chromedriver')
-
-driver.get("https://web.whatsapp.com/")
-wait = WebDriverWait(driver, 600)
-
-# Replace 'Friend's Name' with the name of your friend 
-# or the name of a group
-target = '"+54 9 11 5004-7121"'
-
-# Replace the below string with your own message
 
 
-time.sleep(5)
+def buscoContacto(wait, contacto):
+    x_arg = '//span[contains(@title,"' + contacto + '")]'
+    group_title = wait.until(EC.presence_of_element_located((
+        By.XPATH, x_arg)))
+    group_title.click()
 
-x_arg = '//span[contains(@title,' + target + ')]'
-group_title = wait.until(EC.presence_of_element_located((
-    By.XPATH, x_arg)))
-group_title.click()
-time.sleep(3)
 
-for i in range(5):
-    # sendbutton1 = driver.find_elements_by_css_selector('_2EXPL').click()
+def escriboYenvio(driver, mensaje):
     message = driver.find_elements_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]')[0]
 
-    time.sleep(5)
-
-    string = input("Introducir texto:")
-
-    message.send_keys(string)
-
-    time.sleep(5)
+    message.send_keys(mensaje)
 
     sendbutton = driver.find_elements_by_xpath('//*[@id="main"]/footer/div[1]/div[3]/button')[0]
     sendbutton.click()
-
