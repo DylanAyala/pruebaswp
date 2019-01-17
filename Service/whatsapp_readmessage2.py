@@ -1,10 +1,6 @@
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-import time
-import sys
-import insert
-import buscoMensaje
+from mongo import buscoMensaje, insert
 
 target = '+54 9 11 5004-7121'
 

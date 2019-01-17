@@ -1,12 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-import whatsapp_readmessage2
-import time
-import newMesajeMongo
-import whatsapp_sendmessage
+from Service import whatsapp_readmessage2, whatsapp_sendmessage
+from mongo import newMesajeMongo
 
 driver = webdriver.Chrome('./chromedriver')
 
