@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from Service import whatsapp_readmessage2, whatsapp_sendmessage
 from mongo import newMesajeMongo
 from Service import ContactoConMensajeNuevo
+from mongo import buscoContactoConMensajesNuevos
 
 driver = webdriver.Chrome('./chromedriver')
 
@@ -19,11 +20,17 @@ while True:
         ContactoConMensajeNuevo.buscoClaseDeMensajesNuevos(driver)
     finally:
         pass
-    whatsapp_readmessage2.localizoContacto(wait)
 
-    whatsapp_readmessage2.localizoMensajes(wait)
+    mensajesNuevos = buscoContactoConMensajesNuevos.buscoContactoConMensajesCount()
 
-    whatsapp_readmessage2.iteroMensajes(driver)
+    if mensajesNuevos >= 1:
+        contacto = buscoContactoConMensajesNuevos.buscoContactoConMensajes()
+        for contactos in contacto:
+            whatsapp_readmessage2.localizoContacto(wait, contactos["Contacto"])
+            whatsapp_readmessage2.localizoMensajes(wait)
+            whatsapp_readmessage2.iteroMensajes(driver, contactos["Contacto"])
+            buscoContactoConMensajesNuevos.actualizoContacto(contactos["Contacto"])
+
     count = newMesajeMongo.hayMensajesNuevos()
     if count >= 1:
         for x in newMesajeMongo.buscoMensajesNuevos():
