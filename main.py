@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from Service import whatsapp_readmessage2, whatsapp_sendmessage
 from mongo import newMesajeMongo
+from Service import ContactoConMensajeNuevo
 
 driver = webdriver.Chrome('./chromedriver')
 
@@ -13,7 +14,11 @@ wait = WebDriverWait(driver, 600)
 while True:
 
     wait.until(EC.visibility_of_element_located((By.ID, "pane-side")))
-
+    try:
+        ContactoConMensajeNuevo.esperoClase(wait)
+        ContactoConMensajeNuevo.buscoClaseDeMensajesNuevos(driver)
+    finally:
+        pass
     whatsapp_readmessage2.localizoContacto(wait)
 
     whatsapp_readmessage2.localizoMensajes(wait)
