@@ -6,14 +6,14 @@ from Service import readMessage, sendMessage
 from mongo import newMesajeMongo
 from Service import ContactoConMensajeNuevo
 from mongo import buscoContactoConMensajesNuevos
-
+import time
 driver = webdriver.Chrome('./Driver/chromedriver')
 
 driver.get("https://web.whatsapp.com/")
 wait = WebDriverWait(driver, 600)
 
 while True:
-
+    time.sleep(1)
     # Busco el Panel del los Contactos para setear el inicio de las busquedas
     wait.until(EC.visibility_of_element_located((By.ID, "pane-side")))
     try:
