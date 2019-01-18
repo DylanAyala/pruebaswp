@@ -1,6 +1,6 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from mongo import buscoMensaje, insert
+from mongo import buscoMensaje, guardoMensajeMongo
 
 
 def localizoContacto(wait, contacto):
@@ -26,4 +26,4 @@ def iteroMensajes(driver, contacto):
         resultado = buscoMensaje.realizoQuery(contacto, message, hora)
         # Si no tengo el mensaje en BD lo inserto
         if resultado < 1:
-            insert.insert(contacto, message, hora)
+            guardoMensajeMongo.insert(contacto, message, hora)

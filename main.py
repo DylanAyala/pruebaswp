@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from Service import whatsapp_readmessage2, whatsapp_sendmessage
+from Service import readMessage, sendMessage
 from mongo import newMesajeMongo
 from Service import ContactoConMensajeNuevo
 from mongo import buscoContactoConMensajesNuevos
@@ -37,9 +37,9 @@ while True:
             contacto = buscoContactoConMensajesNuevos.buscoContactoConMensajes()
             for contactos in contacto:
                 # Leo los Mensajes y los Guardo en Mongo
-                whatsapp_readmessage2.localizoContacto(wait, contactos["Contacto"])
-                whatsapp_readmessage2.localizoMensajes(wait)
-                whatsapp_readmessage2.iteroMensajes(driver, contactos["Contacto"])
+                readMessage.localizoContacto(wait, contactos["Contacto"])
+                readMessage.localizoMensajes(wait)
+                readMessage.iteroMensajes(driver, contactos["Contacto"])
                 buscoContactoConMensajesNuevos.actualizoContacto(contactos["Contacto"])
 
         # Busca en Mongo si hay mensajes para enviar
@@ -50,8 +50,8 @@ while True:
             for x in newMesajeMongo.buscoMensajesNuevos():
                 # Busco contacto para enviar y envio mensaje
                 wait.until(EC.visibility_of_element_located((By.ID, "pane-side")))
-                whatsapp_sendmessage.buscoContacto(wait, x["Contacto"])
-                whatsapp_sendmessage.escriboYenvio(driver, x["Mensaje"])
+                sendMessage.buscoContacto(wait, x["Contacto"])
+                sendMessage.escriboYenvio(driver, x["Mensaje"])
                 newMesajeMongo.actualizoMensajeEnviado(x["Contacto"], x["Mensaje"])
     finally:
         pass
