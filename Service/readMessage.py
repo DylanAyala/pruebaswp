@@ -22,7 +22,7 @@ def iteroMensajes(driver, contacto):
         # Busca la el div que contiene el texto del mensaje y lo extraigo
         message = person.find_element_by_xpath('div/div[1]').text
         # Busca la el div que contiene la hora del mensaje y lo extraigo
-        hora = person.find_element_by_xpath('div/div[1]').text
+        hora = person.find_element_by_xpath('div/div[2]').text
         # Pregunto si el mensaje ya lo tengo en mi BD
         resultado = buscoMensaje.realizoQuery(contacto, message, hora)
         # Si no tengo el mensaje en BD lo inserto

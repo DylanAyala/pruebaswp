@@ -7,6 +7,7 @@ from mongo import newMesajeMongo
 from Service import ContactoConMensajeNuevo
 from mongo import buscoContactoConMensajesNuevos
 import time
+
 driver = webdriver.Chrome('./Driver/chromedriver')
 
 driver.get("https://web.whatsapp.com/")
