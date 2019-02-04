@@ -18,16 +18,16 @@ def localizoMensajes(wait):
 def iteroMensajes(driver, contacto):
     # Busca la clase que contiene solo los mensajes entrantes
     for person in driver.find_elements_by_class_name('message-in'):
-
         # Busca la el div que contiene el texto del mensaje y lo extraigo
         message = person.find_element_by_xpath('div/div[1]').text
         # Busca la el div que contiene la hora del mensaje y lo extraigo
         hora = person.find_element_by_xpath('div/div[2]').text
         # Pregunto si el mensaje ya lo tengo en mi BD
-        resultado = buscoMensaje.realizoQuery(contacto, message, hora)
+        print(contacto, message.replace('\n', ' '), hora)
+        resultado = buscoMensaje.realizoQuery(contacto, message.replace('\n', '-> ').replace('\r', ''), hora)
         # Si no tengo el mensaje en BD lo inserto
         if resultado < 1:
-            guardoMensajeMongo.insert(contacto, message, hora)
+            guardoMensajeMongo.insert(contacto, message.replace('\n', '-> ').replace('\r', ''), hora)
 
 
 def respuestasMensajes(driver):

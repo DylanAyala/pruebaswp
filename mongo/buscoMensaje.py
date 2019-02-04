@@ -11,5 +11,6 @@ collection = dataBase['Mensajes']
 def realizoQuery(contacto, mensaje, hora):
     query = json.loads(
         '{"Contacto": ' + '"' + contacto + '"' + ',"Mensaje": ' + '"' + mensaje + '"' + ', "Hora": ' + '"' + hora + '"' + '}')
+    print(query)
     result = collection.count(query)
     return result
