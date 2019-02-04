@@ -2,10 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from Service import readMessage, sendMessage
-from mongo import newMesajeMongo
-from Service import ContactoConMensajeNuevo
-from mongo import buscoContactoConMensajesNuevos
+from Service import readMessage, sendMessage, ContactoConMensajeNuevo
+from mongo import newMesajeMongo, buscoContactoConMensajesNuevos
 import time
 
 driver = webdriver.Chrome('./Driver/chromedriver')
