@@ -34,11 +34,16 @@ def iteroMensajes(driver, contacto):
 
 
 def leerEmoji(driver, contacto, hora):
+    # busca la clase que contiene las imagenes
     images = driver.find_elements_by_class_name('_2DV1k')
     for image in images:
+        # Extra el SRC de la imagen
         src = image.get_attribute('src')
+
         timeNow = time.strftime("%d-%m-%Y")
         path = "./public/emojis/"
         png = "emoji.png"
+        # Gusardo la imagen
         urlretrieve(src, path + contacto + hora.replace(':', '-') + timeNow + png)
+
         return path + contacto + hora.replace(':', '-') + timeNow + png
