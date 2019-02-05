@@ -43,10 +43,10 @@ def leerEmoji(driver, contacto, hora):
 
         timeNow = time.strftime("%d-%m-%Y")
         path = "./public/emojis/"
-        png = "emoji.png"
+        #png = "emoji.png"
         # Gusardo la imagen
-        urlretrieve(src, path + contacto + hora.replace(':', '-') + timeNow + png)
-        return path + contacto + hora.replace(':', '-') + timeNow + png
+        urlretrieve(src, path + contacto + hora.replace(':', '-') + timeNow + src[29:200])
+        return path + contacto + hora.replace(':', '-') + timeNow + src[29:200]
 
 
 def leerEmoji2(driver, contacto, hora):
