@@ -54,3 +54,4 @@ while True:
                 newMesajeMongo.actualizoMensajeEnviado(x["Contacto"], x["Mensaje"])
     finally:
         pass
+

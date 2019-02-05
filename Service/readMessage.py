@@ -1,6 +1,8 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from mongo import buscoMensaje, guardoMensajeMongo
+from urllib.request import urlretrieve
+import time
 
 
 def localizoContacto(wait, contacto):
@@ -22,15 +24,21 @@ def iteroMensajes(driver, contacto):
         message = person.find_element_by_xpath('div/div[1]').text
         # Busca la el div que contiene la hora del mensaje y lo extraigo
         hora = person.find_element_by_xpath('div/div[2]').text
+        if message == '':
+            message = leerEmoji(driver, contacto, hora)
         # Pregunto si el mensaje ya lo tengo en mi BD
-        print(contacto, message.replace('\n', ' '), hora)
         resultado = buscoMensaje.realizoQuery(contacto, message.replace('\n', '-> ').replace('\r', ''), hora)
         # Si no tengo el mensaje en BD lo inserto
         if resultado < 1:
-            guardoMensajeMongo.insert(contacto, message.replace('\n', '-> ').replace('\r', ''), hora)
+            guardoMensajeMongo.insert(contacto, message, hora)
 
 
-def respuestasMensajes(driver):
-    for respuesta in driver.find_elements_by_class_name('_3CVlE'):
-        mensajeDeRespuesta = respuesta.find_element_by_xpath('div/div/div/div/div[2]/span').text
-        return mensajeDeRespuesta
+def leerEmoji(driver, contacto, hora):
+    images = driver.find_elements_by_class_name('_2DV1k')
+    for image in images:
+        src = image.get_attribute('src')
+        timeNow = time.strftime("%d-%m-%Y")
+        path = "./public/emojis/"
+        urlretrieve(src, path + contacto + hora.replace(':', '-') + timeNow + src[29:200])
+        src = src[29:200]
+        return path + contacto + hora.replace(':', '-') + timeNow + src
