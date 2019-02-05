@@ -2,6 +2,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from mongo import buscoMensaje, guardoMensajeMongo
 from urllib.request import urlretrieve
+import urllib
 import time
 
 
@@ -45,5 +46,22 @@ def leerEmoji(driver, contacto, hora):
         png = "emoji.png"
         # Gusardo la imagen
         urlretrieve(src, path + contacto + hora.replace(':', '-') + timeNow + png)
+        return path + contacto + hora.replace(':', '-') + timeNow + png
+
+
+def leerEmoji2(driver, contacto, hora):
+    # busca la clase que contiene las imagenes
+    images = driver.find_elements_by_class_name('_2DV1k')
+
+    for image in images:
+        # Extra el SRC de la imagen
+        src = urllib.request.urlopen(image.get_attribute('src'))
+        date = src.read()
+
+        timeNow = time.strftime("%d-%m-%Y")
+        path = "./public/emojis/"
+        png = "emoji.png"
+        with open(path + contacto + hora.replace(':', '-') + timeNow + png, 'wb') as f:
+            f.write(date)
 
         return path + contacto + hora.replace(':', '-') + timeNow + png
