@@ -47,11 +47,10 @@ while True:
 
             # traigo los mensajes pendientes para enviar
             for x in newMesajeMongo.buscoMensajesNuevos():
+                sendMessage.buscoContacto(wait, x["Contacto"], driver)
                 # Busco contacto para enviar y envio mensaje
                 wait.until(EC.visibility_of_element_located((By.ID, "pane-side")))
-                sendMessage.buscoContacto(wait, x["Contacto"])
                 sendMessage.escriboYenvio(driver, x["Mensaje"])
                 newMesajeMongo.actualizoMensajeEnviado(x["Contacto"], x["Mensaje"])
     finally:
         pass
-
