@@ -10,7 +10,6 @@ collection = dataBase['Mensajes']
 horaLeido = datetime.now()
 
 
-def insert(contacto, mensaje, hora):
-    mydict = {"Contacto": contacto, "Mensaje": mensaje, "Hora": hora, "horaLeido": horaLeido}
+def insert(contacto, mensaje, hora, numero):
+    mydict = {"origen": numero, "contacto": contacto, "mensaje": mensaje, "hora": hora, "horaLeido": horaLeido}
     collection.insert_one(mydict)
-

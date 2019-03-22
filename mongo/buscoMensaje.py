@@ -8,8 +8,8 @@ dataBase = conection['testdb']
 collection = dataBase['Mensajes']
 
 
-def realizoQuery(contacto, mensaje, hora):
+def realizoQuery(contacto, mensaje, hora, numero):
     query = json.loads(
-        '{"Contacto": ' + '"' + contacto + '"' + ',"Mensaje": ' + '"' + mensaje + '"' + ', "Hora": ' + '"' + hora + '"' + '}')
+        '{"origen": "' + numero + '","contacto": ' + '"' + contacto + '"' + ',"mensaje": ' + '"' + mensaje + '"' + ', "hora": ' + '"' + hora + '"' + '}')
     result = collection.count(query)
     return result

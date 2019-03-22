@@ -18,7 +18,7 @@ def localizoMensajes(wait):
     wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.vW7d1")))
 
 
-def iteroMensajes(driver, contacto):
+def iteroMensajes(driver, contacto, numero):
     # Busca la clase que contiene solo los mensajes entrantes
     for person in driver.find_elements_by_class_name('message-in'):
         # Busca la el div que contiene el texto del mensaje y lo extraigo
@@ -28,10 +28,10 @@ def iteroMensajes(driver, contacto):
         if message == '':
             message = leerEmoji(driver, contacto, hora)
         # Pregunto si el mensaje ya lo tengo en mi BD
-        resultado = buscoMensaje.realizoQuery(contacto, message.replace('\n', '-> ').replace('\r', ''), hora)
+        resultado = buscoMensaje.realizoQuery(contacto, message.replace('\n', '-> ').replace('\r', ''), hora, numero)
         # Si no tengo el mensaje en BD lo inserto
         if resultado < 1:
-            guardoMensajeMongo.insert(contacto, message, hora)
+            guardoMensajeMongo.insert(contacto, message, hora, numero)
 
 
 def leerEmoji(driver, contacto, hora):

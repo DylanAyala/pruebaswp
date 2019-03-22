@@ -1,6 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+import time
 
 
 def buscoContacto(wait, contacto, driver):
@@ -20,12 +21,17 @@ def buscoContacto(wait, contacto, driver):
 
 
 def escriboYenvio(driver, mensaje):
-    # Busco el div que contine el imput para escribir
-    message = driver.find_elements_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]')[0]
+    try:
+        time.sleep(3)
+        # Busco el div que contine el imput para escribir
+        message = driver.find_elements_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]')[0]
 
-    # Escribo el mensaje
-    message.send_keys(mensaje)
+        # Escribo el mensaje
+        message.send_keys(mensaje)
 
-    # Envio mensaje
-    sendbutton = driver.find_elements_by_xpath('//*[@id="main"]/footer/div[1]/div[3]/button')[0]
-    sendbutton.click()
+        # Envio mensaje
+        sendbutton = driver.find_elements_by_xpath('//*[@id="main"]/footer/div[1]/div[3]/button')[0]
+        sendbutton.click()
+    except IndexError:
+        print("No se pudo enviar mensaje")
+        pass

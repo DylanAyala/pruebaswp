@@ -7,14 +7,14 @@ try:
         wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.RLfQR")))
 
 
-    def buscoClaseDeMensajesNuevos(driver):
+    def buscoClaseDeMensajesNuevos(driver, numero):
         for person in driver.find_elements_by_class_name('CxUIE'):
             title = person.find_element_by_xpath('div[2]/div[1]/div[1]/span').text
-            count = guardoContactoMongo.buscoElContactoCount(title)
+            count = guardoContactoMongo.buscoElContactoCount(title, numero)
             if count >= 1:
-                guardoContactoMongo.actualizoContacto(title)
+                guardoContactoMongo.actualizoContacto(title, numero)
             else:
-                guardoContactoMongo.guardoContacto(title)
+                guardoContactoMongo.guardoContacto(title, numero)
 
 finally:
     pass

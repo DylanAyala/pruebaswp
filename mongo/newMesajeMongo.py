@@ -9,23 +9,23 @@ dataBase = conection['testdb']
 collection = dataBase['MensajesBulk']
 
 
-def hayMensajesNuevos():
+def hayMensajesNuevos(numero):
     query = json.loads(
-        '{"Procesado": 0}')
+        '{"procesado": 0, "origen": "' + numero + '"}')
     resultado = collection.count(query)
     return resultado
 
 
-def buscoMensajesNuevos():
+def buscoMensajesNuevos(numero):
     query = json.loads(
-        '{"Procesado": 0}')
+        '{"procesado": 0, "origen": "' + numero + '"}')
     result = collection.find(query)
 
     return result
 
 
-def actualizoMensajeEnviado(contacto, mensaje):
+def actualizoMensajeEnviado(contacto, mensaje, numero):
     query = json.loads(
-        '{"Contacto": ' + '"' + contacto + '"' + ',"Mensaje": ' + '"' + mensaje + '"' + ', "Procesado": 0}')
-    newQuery = json.loads('{"$set": {"Procesado": 1}}')
+        '{"origen": "' + numero + '","contacto": ' + '"' + contacto + '"' + ',"mensaje": ' + '"' + mensaje + '"' + ', "procesado": 0}')
+    newQuery = json.loads('{"$set": {"procesado": 1}}')
     collection.update_one(query, newQuery)

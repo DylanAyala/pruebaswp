@@ -9,19 +9,19 @@ dataBase = conection['testdb']
 collection = dataBase['Contactos']
 
 
-def buscoContactoConMensajesCount():
-    query = json.loads('{"MensajesNuevos": 0}')
+def buscoContactoConMensajesCount(numero):
+    query = json.loads('{"mensajesNuevos": 0, "origen": "' + numero + '"}')
     count = collection.count(query)
     return count
 
 
-def buscoContactoConMensajes():
-    query = json.loads('{"MensajesNuevos": 0}')
+def buscoContactoConMensajes(numero):
+    query = json.loads('{"mensajesNuevos": 0, "origen": "' + numero + '"}')
     resultado = collection.find(query)
     return resultado
 
 
-def actualizoContacto(contacto):
-    query = json.loads('{"Contacto": "' + contacto + '"}')
-    querynew = json.loads('{"$set": {"Contacto": "' + contacto + '","MensajesNuevos": 1}}')
+def actualizoContacto(contacto, numero):
+    query = json.loads('{"contacto": "' + contacto + '", "origen": "' + numero + '"}')
+    querynew = json.loads('{"$set": {"contacto": "' + contacto + '","mensajesNuevos": 1}}')
     collection.update_one(query, querynew)
