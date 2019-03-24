@@ -50,11 +50,18 @@ while True:
         if count >= 1:
 
             # traigo los mensajes pendientes para enviar
+            x2 = {"origen": ''}
             for x in newMesajeMongo.buscoMensajesNuevos(numero):
-                sendMessage.buscoContacto(wait, x["contacto"], driver)
-                # Busco contacto para enviar y envio mensaje
+                # Verifico que el mensaje sea para el mismo destino
+                if x2['origen'] != x["origen"]:
+                    # Busco contacto para enviar
+                    sendMessage.buscoContacto(wait, x["contacto"], driver)
+                # Espero a que cargue la paguina    
                 wait.until(EC.visibility_of_element_located((By.ID, "pane-side")))
+                # Envio mensajes
                 sendMessage.escriboYenvio(driver, x["mensaje"])
+                # Actualizo el mensaje enviado
                 newMesajeMongo.actualizoMensajeEnviado(x["contacto"], x["mensaje"], numero)
+                x2 = x
     finally:
         pass
