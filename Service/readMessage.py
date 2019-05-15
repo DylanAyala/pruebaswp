@@ -25,8 +25,8 @@ def iteroMensajes(driver, contacto, numero):
         message = person.find_element_by_xpath('div/div[1]').text
         # Busca la el div que contiene la hora del mensaje y lo extraigo
         hora = person.find_element_by_xpath('div/div[2]').text
-        if message == '':
-            message = leerEmoji(driver, contacto, hora)
+        #if message == '':
+         #   message = leerEmoji(driver, contacto, hora)
         # Pregunto si el mensaje ya lo tengo en mi BD
         resultado = buscoMensaje.realizoQuery(contacto, message.replace('\n', '-> ').replace('\r', ''), hora, numero)
         # Si no tengo el mensaje en BD lo inserto
@@ -38,15 +38,18 @@ def leerEmoji(driver, contacto, hora):
     # busca la clase que contiene las imagenes
     images = driver.find_elements_by_class_name('_2DV1k')
     for image in images:
-        # Extra el SRC de la imagen
-        src = image.get_attribute('src')
-
-        timeNow = time.strftime("%d-%m-%Y")
-        path = "./public/emojis/"
+        # # Extra el SRCde la imagen
+        # src = image.get_attribute('src')
+        # timeNow = time.strftime("%d-%m-%Y")
+        # path = "./public/emojis/"
         # png = "emoji.png"
-        # Gusardo la imagen
-        urlretrieve(src, path + contacto + hora.replace(':', '-') + timeNow + src[29:200])
-        return path + contacto + hora.replace(':', '-') + timeNow + src[29:200]
+        # # Guardo la imagen
+        # urlretrieve(src, path + contacto + hora.replace(':', '-') + timeNow + src[29:200])
+        # return path + contacto + hora.replace(':', '-') + timeNow + src[29:200]
+        image.click()
+        dowloads = driver.find_elements_by_class_name('_3TbsN')
+        dowloads.click()
+        return "hola"
 
 
 def leerEmoji2(person, contacto, hora):

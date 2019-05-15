@@ -5,6 +5,10 @@ from selenium.webdriver.common.by import By
 from Service import readMessage, sendMessage, ContactoConMensajeNuevo, guardoNumero
 from mongo import newMesajeMongo, buscoContactoConMensajesNuevos
 import time
+from selenium.webdriver.chrome.options import Options
+
+options = Options()
+options.binary_location = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 
 driver = webdriver.Chrome('./Driver/chromedriver')
 
@@ -16,7 +20,7 @@ wait.until(EC.visibility_of_element_located((By.ID, "pane-side")))
 numero = guardoNumero.extraigoNumero(driver)
 
 while True:
-    time.sleep(2)
+    time.sleep(4)
     # Busco el Panel del los Contactos para setear el inicio de las busquedas
     wait.until(EC.visibility_of_element_located((By.ID, "pane-side")))
     try:

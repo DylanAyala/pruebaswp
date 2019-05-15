@@ -22,7 +22,7 @@ def buscoContacto(wait, contacto, driver):
 
 def escriboYenvio(driver, mensaje):
     try:
-        time.sleep(3)
+        time.sleep(1)
         # Busco el div que contine el imput para escribir
         message = driver.find_elements_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]')[0]
 
