@@ -16,6 +16,7 @@ driver.get("https://web.whatsapp.com/")
 wait = WebDriverWait(driver, 600)
 # Espero a que cargue el panel
 wait.until(EC.visibility_of_element_located((By.ID, "pane-side")))
+
 # Extraigo la imagen de perfil para saber el numero
 numero = guardoNumero.extraigoNumero(driver)
 
