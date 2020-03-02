@@ -1,5 +1,5 @@
 def extraigoSRC(driver):
-    for image in driver.find_elements_by_class_name('_2umId'):
+    for image in driver.find_elements_by_class_name('_2rZZg'):
         src = image.find_element_by_xpath('div/img').get_attribute('src')
         return src
 

@@ -4,7 +4,7 @@ from mongo import guardoContactoMongo
 
 try:
     def esperoClase(wait):
-        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.RLfQR")))
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div._1rqO1")))
 
 
     def buscoClaseDeMensajesNuevos(driver, numero):

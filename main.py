@@ -8,9 +8,9 @@ import time
 from selenium.webdriver.chrome.options import Options
 
 options = Options()
-options.binary_location = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-
-driver = webdriver.Chrome('./Driver/chromedriver')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+driver = webdriver.Chrome('./Driver/chromedriver', chrome_options=options)
 
 driver.get("https://web.whatsapp.com/")
 wait = WebDriverWait(driver, 600)
@@ -24,6 +24,7 @@ while True:
     time.sleep(4)
     # Busco el Panel del los Contactos para setear el inicio de las busquedas
     wait.until(EC.visibility_of_element_located((By.ID, "pane-side")))
+
     try:
 
         # Espera la clase que contiene cada contacto

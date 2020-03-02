@@ -14,10 +14,7 @@ def buscoContacto(wait, contacto, driver):
     contacto = contacto.replace('+', '')
     contacto = contacto.replace('-', '')
     contacto = contacto.replace(' ', '')
-    driver.get("https://api.whatsapp.com/send?phone=" + contacto)
-    wait.until(EC.visibility_of_element_located((By.ID, "action-button")))
-    test = driver.find_element_by_class_name('button')
-    test.click()
+    driver.get("https://web.whatsapp.com/send?phone=" + contacto)
 
 
 def escriboYenvio(driver, mensaje):
